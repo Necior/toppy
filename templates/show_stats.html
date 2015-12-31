@@ -61,9 +61,17 @@
                 <tr>
                 {% for cell in row %}
                     {% if loop.first %}
-                        <td><a href="{{ url_for('process_details', pid=cell) }}">{{ cell }}</a></td>
+                        {% set pid = cell %}
+                    {% endif %}
+
+                    {% if loop.index == 2 %}
+                        <td><a href="{{ url_for('process_details', pid=pid) }}">{{ cell }}</a></td>
                     {% else %}
                         <td>{{ cell }}</td>
+                    {% endif %}
+
+                    {% if loop.last %}
+                        <td><a href="{{ url_for('kill', pid=pid) }}"> 🔫 Kill!</a></td>
                     {% endif %}
                 {% endfor %}
                 </tr>
