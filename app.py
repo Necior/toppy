@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from flask import Flask, render_template
+from hurry.filesize import size as _size
 import psutil
 
 app = Flask(__name__)
@@ -12,7 +13,6 @@ def get_cpu_stats():
 
 
 def get_memory_stats():
-    from hurry.filesize import size as _size
 
     virt = psutil.virtual_memory()
     swap = psutil.swap_memory()
