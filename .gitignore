@@ -1,0 +1,12 @@
+# Python-related
+__pycache__/
+*.py[cod]
+
+# virtualenv
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ss]cripts
+pyvenv.cfg
+pip-selfcheck.json
