@@ -1,0 +1,14 @@
+{% if error %}
+    {{ error }}
+{% else %}
+    Hi. My name is <strong>{{ process.name }}</strong>.
+    I'm <strong>{{ process.desc }}</strong>.
+    In the prison they gave me a number.
+    That number is <strong>{{ process.pid }}</strong>.
+    {% if process.ppid == 0 %}
+    I'm like Batman.
+    I have no parent(s).
+    {% else %}
+    My only parent is <strong>{{ process.parent_name }}</strong>.
+    {% endif %}
+{% endif %}

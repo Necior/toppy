@@ -60,7 +60,11 @@
             {% for row in process_list %}
                 <tr>
                 {% for cell in row %}
-                    <td>{{ cell }}</td>
+                    {% if loop.first %}
+                        <td><a href="{{ url_for('process_details', pid=cell) }}">{{ cell }}</a></td>
+                    {% else %}
+                        <td>{{ cell }}</td>
+                    {% endif %}
                 {% endfor %}
                 </tr>
             {% endfor %}

@@ -5,6 +5,7 @@ from hurry.filesize import size as _size
 import csv
 import io
 import psutil
+import subprocess
 
 app = Flask(__name__)
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
@@ -52,6 +53,16 @@ def get_process_list():
     return process_list
 
 
+def guess_description(process_name):
+    try:
+        out = subprocess.check_output(
+                ['apropos', '--section', '1', '^' + process_name + '$'])
+    except subprocess.CalledProcessError:
+        return 'hidden in the darkness, no one knows who I am'
+
+    return out.decode('utf-8').splitlines()[0].split(' - ')[1]
+
+
 @app.route('/')
 def hello():
     our_response = render_template(
@@ -72,6 +83,30 @@ def csv_export():
     writer.writerows(get_process_list())
 
     return Response(csv_content.getvalue(), mimetype='text/csv')
+
+
+@app.route('/details/<int:pid>')
+def process_details(pid):
+    try:
+        p = psutil.Process(pid=pid)
+    except psutil.NoSuchProcess:
+        return render_template('show_details.html', error='No such process')
+
+    process = dict()
+
+    process['name'] = p.name()
+    process['pid'] = p.pid
+    process['ppid'] = p.ppid()
+
+    try:
+        process['parent_name'] = psutil.Process(pid=p.ppid()).name()
+    except psutil.NoSuchProcess:
+        pass
+
+    process['time'] = p.cpu_times().user
+    process['desc'] = guess_description(p.name())
+
+    return render_template('show_details.html', process=process)
 
 
 if __name__ == '__main__':
