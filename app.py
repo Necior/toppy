@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
-from flask import Flask, render_template
+from flask import Flask, render_template, Response
 from hurry.filesize import size as _size
+import csv
+import io
 import psutil
 
 app = Flask(__name__)
@@ -60,6 +62,16 @@ def hello():
     )
 
     return our_response
+
+
+@app.route('/csv')
+def csv_export():
+    csv_content = io.StringIO()
+    writer = csv.writer(csv_content)
+    writer.writerow(['PID', 'name', 'status', 'user'])
+    writer.writerows(get_process_list())
+
+    return Response(csv_content.getvalue(), mimetype='text/csv')
 
 
 if __name__ == '__main__':

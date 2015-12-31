@@ -55,6 +55,7 @@
 
         <div id="processlist">
             <h2>Process List</h2>
+            <span>Wanna download? <a href="{{ url_for('csv_export') }}">Export to CSV</a>!</span>
             <table>
             {% for row in process_list %}
                 <tr>
