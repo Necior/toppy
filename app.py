@@ -115,7 +115,7 @@ def kill(pid):
         p = psutil.Process(pid=pid)
         p.kill()
     except (psutil.NoSuchProcess, psutil.AccessDenied):
-        return 'Failed (there is no such process or access denied)'
+        return 'Failed (there is no such process or access denied).'
 
     return 'Zed\'s dead baby, Zed\'s dead.'
 
