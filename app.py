@@ -50,7 +50,7 @@ def get_process_list():
     return process_list
 
 
-@app.route("/")
+@app.route('/')
 def hello():
     our_response = render_template(
         'show_stats.html',
@@ -62,5 +62,5 @@ def hello():
     return our_response
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
