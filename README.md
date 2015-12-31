@@ -1,7 +1,7 @@
 # toppy
 
 *toppy* is a top-like web app written in Python using Flask.
-**Warning**: toppy is not secure or stable by any means.
+**Warning**: *toppy* is not secure or stable by any means.
 It's just an educational tool.
 
 ## Installation
