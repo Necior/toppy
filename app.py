@@ -16,7 +16,6 @@ def get_cpu_stats():
 
 
 def get_memory_stats():
-
     virt = psutil.virtual_memory()
     swap = psutil.swap_memory()
 
