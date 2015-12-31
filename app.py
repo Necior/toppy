@@ -53,12 +53,11 @@ def get_process_list():
 @app.route("/")
 def hello():
     our_response = render_template(
-        'show_stats.html', 
+        'show_stats.html',
         cpu_data=enumerate(get_cpu_stats()),
         mem_data=get_memory_stats(),
         process_list=get_process_list(),
     )
-
 
     return our_response
 
