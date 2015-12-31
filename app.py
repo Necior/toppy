@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from flask import Flask, render_template, session
+from flask import Flask, render_template
 import psutil
 
 app = Flask(__name__)
