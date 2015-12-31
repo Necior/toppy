@@ -109,5 +109,15 @@ def process_details(pid):
     return render_template('show_details.html', process=process)
 
 
+@app.route('/kill/<int:pid>')
+def kill(pid):
+    try:
+        p = psutil.Process(pid=pid)
+        p.kill()
+    except (psutil.NoSuchProcess, psutil.AccessDenied):
+        return 'Failed (there is no such process or access denied)'
+
+    return 'Zed\'s dead baby, Zed\'s dead.'
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -8,7 +8,8 @@
     {% if process.ppid == 0 %}
     I'm like Batman.
     I have no parent(s).
+    Let me die, <a href="{{ url_for('kill', pid=process.pid) }}">kill me</a>.
     {% else %}
-    My only parent is <strong>{{ process.parent_name }}</strong>.
+    My only parent is <strong>{{ process.parent_name }}</strong> but you can <a href="{{ url_for('kill', pid=process.pid) }}">kill me</a> anyway.
     {% endif %}
 {% endif %}
